@@ -2,22 +2,19 @@ sudo: false
 
 os:
   - linux
-  - osx
 
 language: python
 python:
   - 3.4
   - 3.5
 
-addons:
+#addons:
 
-before install:
-
-install:
+#install:
 
 script:
  - make clean
  - make
 
-after_success:
+#after_success:
 
