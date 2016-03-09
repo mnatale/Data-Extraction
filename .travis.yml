@@ -11,10 +11,3 @@ script: make
 
 after_success:
 
-notifications:
-  email:
-	  recipients:
-
-		on_success: change
-		on_failure: always
-
