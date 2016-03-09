@@ -1,7 +1,20 @@
+sudo: false
+
 Language: python
 python:
   - 3.4
   - 3.5
 
-# Commands to run tests
-script: nosetests
+install:
+
+script: make
+
+after_success:
+
+notifications:
+  email:
+	  recipients:
+
+		on_success: change
+		on_failure: always
+
