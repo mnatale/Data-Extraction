@@ -17,8 +17,8 @@ before install:
 install:
 
 script:
-  make clean
-  make
+ - make clean
+ - make
 
 after_success:
 
