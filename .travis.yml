@@ -1,0 +1,6 @@
+Language: python
+python:
+	- "3.5"
+
+# Commands to run tests
+script: nosetests
