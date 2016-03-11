@@ -1,3 +1,26 @@
+"""
+This program is a template that generates a formatted python program based on
+column names of the header row of data file. The source data file in this
+example is keyed on a US state names including WDC and a 4 digit year. The
+template reads the data file state-by-state and and assembles a row/col
+format with State, full formed date and corresponding data.
+
+    Raw data format:
+      Estimated crime in Alabama,,,,,,,,,,,,,,,,,,,
+      ,,,,,,,,,,,,,,,,,,,
+      Year,Population,Violent crime total,Murder and Manslaughter,...
+			1960,3266740,6097,406,281,...
+			1961,3302000,5564,427,252,...
+
+		Generated output format:
+		  State,Year,Population,Violent crime total,Murder and Manslaughter,...
+			Alabama,12/31/1960,3266740,6097,406,281,...
+			Alabama,12/31/1961,3302000,5564,427,252,...
+			...
+
+"""
+
+
 print("#!/usr/bin/python\n\
 \n\
 ################################################################################\n\
@@ -39,7 +62,7 @@ print("\n\
 ")
 header_str = "Year,Population,Violent crime total,Murder and nonnegligent Manslaughter,Forcible rape,Robbery,Aggravated assault,Property crime total,Burglary,Larceny-theft,Motor vehicle theft,Violent Crime rate,Murder and nonnegligent manslaughter rate,Forcible rape rate,Robbery rate,Aggravated assault rate,Property crime rate,Burglary rate,Larceny-theft rate,Motor vehicle theft rate"
 
-prepend_header ="print(\"State\", \",\", \""
+prepend_header = "print(\"State\", \",\", \""
 
 append_header = "\", sep='')"
 new_header = ""
@@ -112,9 +135,8 @@ for x in new_list:
     new_list = new_list.replace("%d", str(num), 1)
     num += 1
 
-new_list = new_list.replace("dlist['Year']  = line_list",
-                            "dlist['Year'] = \"1/31/\" + line_list")
-
+new_list = new_list.replace("dlist['Year'] = line_list",
+                            "dlist['Year'] = \"12/31/\" + line_list")
 print(new_list)
 
 print("\n\
