@@ -12,7 +12,7 @@ Yet another Chrome Markdown Editor.
 
 ## Syntax Highlight
 
-```{python,eval=TRUE}
+```{python, results='asis'}
 x = 'hello, python world!'
 print(x.split(' '))
 
