@@ -10,11 +10,15 @@ python:
 
 #addons:
 
-#install:
+install:
+   - pip -r requirements.txt
+   - pip install coveralls
 
 script:
- - make clean
- - make
+   - make clean
+   - make
+   - coverage run template-fbi-ucr.py
 
-#after_success:
+after_success:
+   coveralls
 
