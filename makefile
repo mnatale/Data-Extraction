@@ -2,6 +2,8 @@
 # 
 all: test
 
+lint:
+			pylint ./template-fbi-ucr.py
 test: 
 			python ./template-fbi-ucr.py > ./fbi-ucr.py
 			python ./fbi-ucr.py CrimeStatebyStateAll.csv > ./result.csv
