@@ -12,7 +12,7 @@ Yet another Chrome Markdown Editor.
 
 ## Syntax Highlight
 
-```{python, results='asis'}
+```{python,eval=TRUE,results='asis'}
 x = 'hello, python world!'
 print(x.split(' '))
 
@@ -30,8 +30,8 @@ print(x.split(' '))
 
 | Tables   |      Are      |  Cool |
 |----------|:-------------:|------:|
-| col 1 is |  *left-aligned* | **$1600** |
-| col 2 is |    centered   |   $12 |
+| `col 1 is` |  *left-aligned* | **$1600** |
+| `col 2 is` |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
 
 - [x] Finish my changes
