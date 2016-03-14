@@ -31,3 +31,15 @@ format with State, fully formed date (%m/%d/%Y) and corresponding data. BI appli
 
 ### Running Auto-generated Script
 **Usage:** python fbi-ucr.py > <formatted-file-name>.csv
+
+**Source Data**
+    <p>The source data files used for this example is from FBI, Uniform Crime Reports, prepared by the National Archive of Criminal Justice Data Date of download: Mar 22 2015 http://www.ucrdatatool.gov</p>
+
+###To-do list
+- [] re-write with functions.
+- [] Automated data extraction and from website.
+- [] Automated year concatenation.
+- [] Add -help section.
+- [] Add template code to write file output to generated python file.
+- [] Add template code to auto-gen file output in generated python file.
+
