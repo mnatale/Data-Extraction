@@ -1,0 +1,37 @@
+doc-warnings: yes
+
+test-warnings: no
+
+#<veryhigh, high, medium, low, verylow>
+strictness: veryhigh
+
+pep8:
+    full: true
+#		none: true
+
+max-line-length: 120
+
+pylint:
+    run: true
+
+uses:
+    - django
+    - celery
+    - flask
+
+autodetect: yes
+
+requirements:
+   - deps/core.txt
+   - deps/test.txt
+
+ignore-paths:
+   - docs
+   - mypackage/vendor
+
+ignore-patterns:
+   - ^example/doc_.*\.py$
+   - (^|/)docs(/|$)
+
+python-targets:
+   - 3
