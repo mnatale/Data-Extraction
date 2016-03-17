@@ -1,5 +1,8 @@
 # Data-Extraction
 
+## Lint
+[![Code Health](https://landscape.io/github/mnatale/Data-Extraction/master/landscape.svg?style=plastic)](https://landscape.io/github/mnatale/Data-Extraction/master)
+
 ## Build
 [![Build Status](https://travis-ci.org/mnatale/Data-Extraction.svg?branch=master)](https://travis-ci.org/mnatale/Data-Extraction)
 [![Requirements Status](https://requires.io/github/mnatale/Data-Extraction/requirements.svg?branch=master)](https://requires.io/github/mnatale/Data-Extraction/requirements/?branch=master)
