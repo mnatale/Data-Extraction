@@ -11,7 +11,7 @@
 
 ###Description
 This program is a template that generates a formatted python program based on
-column names of the header row of data file. The source data file in this
+column names of the header row of a data file. The source data file in this
 example is keyed on US state names including Washington DC and a 4-digit year (%Y). The template reads the data file state-by-state and assembles a row/col
 format with State, fully formed date (%m/%d/%Y) and corresponding data. BI applications behave better with fully formed dates.
 
@@ -33,7 +33,7 @@ format with State, fully formed date (%m/%d/%Y) and corresponding data. BI appli
 **Usage:** python template-fbi-ucr.py > fbi-ucr.py
 
 ### Running Auto-generated Script
-**Usage:** python fbi-ucr.py > <formatted-file-name>.csv
+**Usage:** python fbi-ucr.py > &lt;formatted-file-name&gt;.csv
 
 **Source Data**
     <p>The source data files used for this example is from FBI, Uniform Crime Reports, prepared by the National Archive of Criminal Justice Data Date of download: Mar 22 2015 http://www.ucrdatatool.gov</p>
