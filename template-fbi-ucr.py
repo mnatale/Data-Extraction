@@ -63,15 +63,15 @@ def main(fhobj):
 # Insert comma separated header here
 header_str = "Year,Population,Violent crime total,Murder and nonnegligent Manslaughter,Forcible rape,Robbery,Aggravated assault,Property crime total,Burglary,Larceny-theft,Motor vehicle theft,Violent Crime rate,Murder and nonnegligent manslaughter rate,Forcible rape rate,Robbery rate,Aggravated assault rate,Property crime rate,Burglary rate,Larceny-theft rate,Motor vehicle theft rate"
 
-prepend_header = "    print(\"State\", \",\", \""
-append_header = "\", sep='')"
-new_header = ""
+new_header = "    print(\"State,"
+append_header = "\")"
 
-for i in header_str.replace(",", "\", \",\", \""):
-    new_header = new_header + i
+# Append column names to new header
+#for i in header_str:
+#    new_header = new_header + i
 
-# Gen fully formed header for 1st row
-print(prepend_header + new_header + append_header)
+# Gen print statement for fully formed header for 1st row
+print(new_header + header_str + append_header)
 
 print("""
 # Main line processing loop.
