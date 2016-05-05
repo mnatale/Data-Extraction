@@ -1,6 +1,6 @@
 # Data-Extraction
 
-## Lint
+## PEP8 Lint
 [![Code Health](https://landscape.io/github/mnatale/Data-Extraction/master/landscape.svg?style=plastic)](https://landscape.io/github/mnatale/Data-Extraction/master)
 
 ## Build
@@ -38,4 +38,4 @@ format with State, fully formed date (%m/%d/%Y) and corresponding data. BI appli
 - [ ] Automated data extraction and from website.
 - [X] Automated year concatenation.
 - [X] Rewrite code to do all text processing - no template
-- [ ] Write output to .csv file
+- [X] Write output to .csv file

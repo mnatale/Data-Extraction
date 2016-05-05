@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-The following code extracts data line by line from a text file and 
+The following code extracts data line by line from a text file and
 output can be used by Excel, Tableau or other BI tools for processing.
 
 Requires Python 3.x or later.
@@ -40,14 +40,14 @@ def openfile():
             ...
       '''))
     parser.add_argument('-s', '--silent',
-        action='store_false', 
+        action='store_false',
         default='store_true',
         help='Silent mode - no screen output.')
 
     parser.add_argument('rdfile', type=argparse.FileType('r'),
         help='Input file name required (text or csv).')
 
-    parser.add_argument('wrfile', nargs='?',type=argparse.FileType('w'),
+    parser.add_argument('wrfile', nargs='?', type=argparse.FileType('w'),
         default='fbi_ucr.csv',
         help='Optional output file name. Default is fbi_ucr.csv.')
 
@@ -81,7 +81,8 @@ def format_data(args):
             header_st = "State," + line.rstrip('\n')
             header_str = line.rstrip('\n')
             args.wrfile.write(header_st + '\n')
-            if args.silent: print(header_st, end='\n')
+            if args.silent:
+                print(header_st, end='\n')
             continue
 
         # Isolate lines containing State names.
@@ -103,7 +104,8 @@ def format_data(args):
             new_line.append([v for (k, v) in dlist.items() if k == colname])
         new_line = str(new_line).replace('[', '').replace(']', '')
         args.wrfile.write(new_line.replace("'", "") + "\n")
-        if args.silent: print(new_line.replace("'", ""))
+        if args.silent:
+            print(new_line.replace("'", ""))
 
     #Close files
     args.wrfile.close()
