@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 """
 Requires Python 3.x or later
  The following code extracts data line by line from a text file.
@@ -13,6 +14,9 @@ import sys
 import argparse
 
 def openfile():
+    """
+    Input Parsing
+    """
     parser = argparse.ArgumentParser(description='Process comma separated text file.')
     parser.add_argument('filename')
     args = parser.parse_args()
@@ -54,18 +58,18 @@ def format_data(fhobj):
             continue
 
         # Populate hash
-        for colname, v in zip(header_str.split(','), line_content):
+        for colname, val in zip(header_str.split(','), line_content):
             if colname != "Year":
-                dlist[colname] = v
+                dlist[colname] = val
             else:
-                dlist[colname] = "12/31/" + v
+                dlist[colname] = "12/31/" + val
 
         # Align hash data with header layout for output
-        x = []
+        new_line = []
         for colname in header_st.split(','):
-            x.append([v for (k, v) in dlist.items() if k == colname])
-        x = str(x).replace('[','').replace(']','')
-        print(x.replace("'",""))
+            new_line.append([v for (k, v) in dlist.items() if k == colname])
+        new_line = str(new_line).replace('[','').replace(']','')
+        print(new_line.replace("'",""))
 
 # main
 if __name__ == "__main__":
