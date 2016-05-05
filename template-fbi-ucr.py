@@ -1,54 +1,15 @@
-"""
-Requires: Python 3.x or later
-
-    Author: Mark Natale - Boston MA
-    email: mnatalex54@gmail.com
-    Copyright 2016
-    https://github.com/mnatale/Data-Extraction
-
-This program is a template that generates a formatted python program based on
-column names of the header row of data file. The source data file in this
-example is keyed on US state names including WDC and a 4 digit year. The
-template reads the data file state-by-state and assembles a row/col
-format with State, fully formed date and corresponding data.
-
-    Raw data in format:
-      Estimated crime in Alabama,,,,,,,,,,,,,,,,,,,
-      ,,,,,,,,,,,,,,,,,,,
-      Year,Population,Violent crime total,Murder and Manslaughter,...
-      1960,3266740,6097,406,281,...
-      1961,3302000,5564,427,252,...
-      ...
-
-    Generated output format:
-      State,Year,Population,Violent crime total,Murder and Manslaughter,...
-      Alabama,12/31/1960,3266740,6097,406,281,...
-      Alabama,12/31/1961,3302000,5564,427,252,...
-      ...
-
-Usage: Python template-fbi-ucr.py > fbi-ucr.py
-
-"""
-
-# Template begins here
-print("""#!/usr/bin/python
-# Auto-generated Python code
+#!/usr/bin/python
 # Requires Python 3.x or later
-# The following code is a brut force method to xtract strings from the output
-# of a text file. Once extracted the strings are scrubbed and # formated for
-# Excel or Tableau processing.
+# The following code extracts data line by line from a text file.
+# output can be used by Excel, Tableau or other BI tools for processing.
 #
 # Author: Mark Natale - Boston MA
 # email: mnatalex54@gmail.com
-#
 # Copyright 2016
-#
-# Py Library Imports
+
+# Library Imports
 import sys
 import argparse
-
-# Global var init
-dlist = {}
 
 def openfile():
     parser = argparse.ArgumentParser(description='Process comma separated text file.')
@@ -57,95 +18,55 @@ def openfile():
     return open(args.filename, "r")
 
 def main(fhobj):
-# Header from row 1 of data table.
-""")
-
-# Insert comma separated header here
-header_str = "Year,Population,Violent crime total,Murder and nonnegligent Manslaughter,Forcible rape,Robbery,Aggravated assault,Property crime total,Burglary,Larceny-theft,Motor vehicle theft,Violent Crime rate,Murder and nonnegligent manslaughter rate,Forcible rape rate,Robbery rate,Aggravated assault rate,Property crime rate,Burglary rate,Larceny-theft rate,Motor vehicle theft rate"
-
-new_header = "    print(\"State,"
-append_header = "\")"
-
-# Append column names to new header
-#for i in header_str:
-#    new_header = new_header + i
-
-# Gen print statement for fully formed header for 1st row
-print(new_header + header_str + append_header)
-
-print("""
-# Main line processing loop.
+    dlist = {}
+    first_pass = False
+    # Main line processing loop.
     for line in fhobj:
         if len(line) > 400:
             print(len(line))
             sys.exit("Readline error: Line length is longer than expected.")
-				# split the comma separate line into a vector
-        line_content = line.rstrip().replace(",", " ").split()    # remove ',' and ws
+        # split the comma separate line into a vector
+        line_content = line.rstrip().replace(",", " ").split() 
 
-        # Filter out unnwanted lines
+        # Filter out unwanted lines
         if line_content == '':    # filter blank lines
             continue
         if line_content == []:    #Filter out line full of nulls(,,,,,)
             continue
+
+        # Check for header row by looking up first column name
+        # can't assume row 1 so lookup by 1st two colnames
         if line_content[0] == "Year":
+            if first_pass == True:
+                continue
+            first_pass = True
+            header_st = "State," + line.rstrip('\n')
+            header_str = line.rstrip('\n')
+            print(header_st, end='\n')
             continue
 
-        # Isolate  lines containing State. Join two word state names and WDC.
+        # Isolate lines containing State names.
         if line_content[0] == "Estimated":
-            if line_content[3] == "NEW":
-                dlist['STATE'] = line_content[3] + " " +  line_content[4]
-            elif line_content[3] == "North":
-                dlist['STATE'] = line_content[3] + " " +  line_content[4]
-            elif line_content[3] == "South":
-                dlist['STATE'] = line_content[3] + " " +  line_content[4]
-            elif line_content[3] == "West":
-                dlist['STATE'] = line_content[3] + " " +  line_content[4]
-            elif line_content[3] == "District":
-                dlist['STATE'] = line_content[3] + " " +  line_content[4] + " " +  line_content[5]
-            else:
-                dlist['STATE'] = line_content[3]
+            dlist['State'] = str(line_content[3:]) \
+								.strip('[]').replace(",","").replace("'", "")
+            print(dlist)
             continue
-						""")
 
-# Assemble the data reference to dictonary name string.
-# Keep 8 spaces prepended to dlist
-new_list = "        dlist['"
-append_list = "'] = line_content[%d]"
+        # Populate hash
+        for colname, v in zip(header_str.split(','), line_content):
+            if colname != "Year":
+                dlist[colname] = v
+            else:
+                dlist[colname] = "12/31/" + v
 
-for i in header_str.replace(",", "'] = line_content[%d]\n        dlist['"):
-    new_list = new_list + i
+        # Align hash data with header layout for output
+        x = []
+        for colname in header_st.split(','):
+            x.append([v for (k, v) in dlist.items() if k == colname])
+        x = str(x).replace('[','').replace(']','')
+        print(x.replace("'",""))
 
-new_list = new_list + append_list
-
-# Now that the 'dlist' string is fully assembled, need to place the line_content
-# index values in the string.
-num = 0
-for x in new_list:
-    new_list = new_list.replace("%d", str(num), 1)
-    num += 1
-
-new_list = new_list.replace("dlist['Year'] = line_content",
-                            "dlist['Year'] = \"12/31/\" + line_content")
-
-print(new_list)
-
-print("""
-# Gen the data for output
-""")
-
-prepend_list = "        print(dlist['STATE'], \",\", "
-append_dlist = "'], sep='')"
-print_list = "dlist['"
-
-for i in header_str.replace(",", "'], \",\", dlist['"):
-    print_list = print_list + i
-
-print_list = print_list + append_dlist
-
-print(prepend_list + print_list)
-
-print("""
+# main
 if __name__ == "__main__":
     main(openfile())
-""")
 
