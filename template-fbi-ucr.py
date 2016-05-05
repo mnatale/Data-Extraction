@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-Requires Python 3.x or later
+ Requires Python 3.x or later.
  The following code extracts data line by line from a text file.
  output can be used by Excel, Tableau or other BI tools for processing.
 
@@ -14,9 +14,7 @@ import sys
 import argparse
 
 def openfile():
-    """
-    Input Parsing
-    """
+    """Input Parsing."""
     parser = argparse.ArgumentParser(description='Process comma separated text file.')
     parser.add_argument('filename')
     args = parser.parse_args()
@@ -54,7 +52,7 @@ def format_data(fhobj):
         # Isolate lines containing State names.
         if line_content[0] == "Estimated":
             dlist['State'] = str(line_content[3:]) \
-                .strip('[]').replace(",","").replace("'", "")
+                .strip('[]').replace(",", "").replace("'", "")
             continue
 
         # Populate hash
@@ -68,8 +66,8 @@ def format_data(fhobj):
         new_line = []
         for colname in header_st.split(','):
             new_line.append([v for (k, v) in dlist.items() if k == colname])
-        new_line = str(new_line).replace('[','').replace(']','')
-        print(new_line.replace("'",""))
+        new_line = str(new_line).replace('[', '').replace(']', '')
+        print(new_line.replace("'", ""))
 
 # main
 if __name__ == "__main__":
