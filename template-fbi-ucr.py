@@ -49,7 +49,6 @@ def main(fhobj):
         if line_content[0] == "Estimated":
             dlist['State'] = str(line_content[3:]) \
 								.strip('[]').replace(",","").replace("'", "")
-            print(dlist)
             continue
 
         # Populate hash
