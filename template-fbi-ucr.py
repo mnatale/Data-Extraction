@@ -1,12 +1,13 @@
 #!/usr/bin/python
-# Requires Python 3.x or later
-# The following code extracts data line by line from a text file.
-# output can be used by Excel, Tableau or other BI tools for processing.
-#
-# Author: Mark Natale - Boston MA
-# email: mnatalex54@gmail.com
-# Copyright 2016
+"""
+Requires Python 3.x or later
+ The following code extracts data line by line from a text file.
+ output can be used by Excel, Tableau or other BI tools for processing.
 
+ Author: Mark Natale - Boston MA
+ email: mnatalex54@gmail.com
+ Copyright 2016
+"""
 # Library Imports
 import sys
 import argparse
@@ -17,7 +18,8 @@ def openfile():
     args = parser.parse_args()
     return open(args.filename, "r")
 
-def main(fhobj):
+def format_data(fhobj):
+""" All the work gets done here."""
     dlist = {}
     first_pass = False
     # Main line processing loop.
@@ -26,7 +28,7 @@ def main(fhobj):
             print(len(line))
             sys.exit("Readline error: Line length is longer than expected.")
         # split the comma separate line into a vector
-        line_content = line.rstrip().replace(",", " ").split() 
+        line_content = line.rstrip().replace(",", " ").split()
 
         # Filter out unwanted lines
         if line_content == '':    # filter blank lines
@@ -48,7 +50,7 @@ def main(fhobj):
         # Isolate lines containing State names.
         if line_content[0] == "Estimated":
             dlist['State'] = str(line_content[3:]) \
-								.strip('[]').replace(",","").replace("'", "")
+                .strip('[]').replace(",","").replace("'", "")
             continue
 
         # Populate hash
@@ -67,5 +69,5 @@ def main(fhobj):
 
 # main
 if __name__ == "__main__":
-    main(openfile())
+    format_data(openfile())
 
