@@ -3,10 +3,10 @@
 all: test
 
 lint1:
-			pylint ./template-fbi-ucr.py
+			pylint ./fbi_ucr.py
 
 test: 
-			python ./template-fbi-ucr.py CrimeStatebyStateAll.csv > data.txt
+			python ./fbi_ucr.py CrimeStatebyStateAll.csv > data.txt
 
 
 clean: 

@@ -17,7 +17,7 @@ install:
 script:
    - make clean
    - make
-   - coverage run template-fbi-ucr.py CrimeStatebyStateAll.csv
+   - coverage run fbi_ucr.py CrimeStatebyStateAll.csv
 
 after_success:
    coveralls
