@@ -19,7 +19,7 @@ def openfile():
     return open(args.filename, "r")
 
 def format_data(fhobj):
-""" All the work gets done here."""
+    """All the work gets done here."""
     dlist = {}
     first_pass = False
     # Main line processing loop.
